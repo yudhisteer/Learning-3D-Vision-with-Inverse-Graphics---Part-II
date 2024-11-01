@@ -1,5 +1,10 @@
 # Learning-3D-Vision-with-Inverse-Graphics---Part-II
 
+## Plan of Action
+1. Neural Volume Rendering
+2. Neural Surface Rendering
+3. 
+
 ## References
 1. https://github.com/learning3d/assignment3
 2. https://andrewkchan.dev/posts/lit-splat.html

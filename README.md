@@ -10,4 +10,5 @@
 2. https://andrewkchan.dev/posts/lit-splat.html
 3. https://learning3d.github.io/schedule.html
 4. https://www.scenerepresentations.org/courses/inverse-graphics-23/
-5. 
+5. https://www.songho.ca/opengl/gl_transform.html
+6. https://learnopengl.com/Advanced-Lighting/Shadows/Shadow-Mapping

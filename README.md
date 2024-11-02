@@ -1,9 +1,18 @@
 # Learning-3D-Vision-with-Inverse-Graphics---Part-II
 
 ## Plan of Action
-1. Neural Volume Rendering
-2. Neural Surface Rendering
-3. 
+1. [Scene Representations](#sr)
+2. [The Rendering Equation](#tdr)
+3. [Differentiable Rendering](#dr)
+4. [Neural Volume Rendering](#nvr)
+5. [Neural Surface Rendering](#nsr)
+
+---------------------
+
+## 1. Scene Representations
+
+
+---------------------
 
 ## References
 1. https://github.com/learning3d/assignment3

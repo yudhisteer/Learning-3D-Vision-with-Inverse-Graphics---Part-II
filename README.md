@@ -3,13 +3,22 @@
 ## Plan of Action
 1. [Scene Representations](#sr)
 2. [The Rendering Equation](#tdr)
-3. [Differentiable Rendering](#dr)
-4. [Neural Volume Rendering](#nvr)
-5. [Neural Surface Rendering](#nsr)
+3. [Neural Surface Rendering](#nsr)
+4. [Differentiable Rendering](#dr)
+5. [Neural Volume Rendering](#nvr)
+
 
 ---------------------
-
+<a name="sr"></a>
 ## 1. Scene Representations
+
+
+
+
+
+---------------------
+<a name="tdr"></a>
+## 2. The Rendering Equation
 
 
 ---------------------

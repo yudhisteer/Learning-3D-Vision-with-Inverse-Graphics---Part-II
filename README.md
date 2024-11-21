@@ -11,6 +11,33 @@
 ---------------------
 <a name="sr"></a>
 ## 1. Scene Representations
+In Part I of the series, we saw how we can parametrize a surface with mesh, point cloud or voxel grid. Now, we want to parameterize 'everything, everywhere, all at once'. How do we do that? While surface representations rely on surface parameterization, volumetric representations require volumetric parameterization—more specifically called '**field parametrization**'. To explain this change in terminology, let's define what a field is:
+
+_A field is a physical quantity represented by a scalar or vector that has a value for each point in space and time._
+
+With volumetric representation, we want to create these representations for every point in 3D space(not just on surfaces). That is, we densely map every coordinate in space to the properties of that 3D coordinate. The term 'field', therefore, represents any function that takes a space, time, or space-time coordinate as input and maps it to a known quantity at that coordinate."
+The core concepts and explanation are sound—it's a legitimate explanation of fields and their relationship to volumetric parameterization. The technical content is accurate; it just needed some polish in the writing.
+
+
+
+**1. Occupancy Field**
+
+Once way if to use an **occupancy field**. It is a **continuous function** that maps any 3D point to a **probability value**([0, 1]) that indicates the **likelihood** of being occupied. We can choose the level set to be ```0.5``` such that above that value it is **classifed** as "occupied" and below is "not occupied" - similar to how a **logistic regression** would work in 3D space.
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/5866832e-102b-4a8e-953f-f10109532135" width="30%" />
+</p>
+
+Occupanyc fields are **implicit representations** as we do not store actual surface or volume points. Instead, we store a function (a neural network) that can tell us for ANY point whether it's occupied. The surface is defined **implicitly** as the level set where ```f(x,y,z) = 0.5```.
+
+**2. Signed Distance Field**
+Another example is to use a SDF where for every point in 3D space, it gives us the distance to te surface. Normally, negative values = inside, positive values = outside and zero = exactly on surface.
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/d73fcc83-f4cc-4a8d-85a7-23441bae311c" width="30%" />
+</p>
+
+
 
 ```python
     def query(self, coordinates: torch.Tensor) -> torch.Tensor:

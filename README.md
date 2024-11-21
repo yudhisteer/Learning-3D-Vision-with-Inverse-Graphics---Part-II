@@ -30,3 +30,5 @@
 4. https://www.scenerepresentations.org/courses/inverse-graphics-23/
 5. https://www.songho.ca/opengl/gl_transform.html
 6. https://learnopengl.com/Advanced-Lighting/Shadows/Shadow-Mapping
+7. https://towardsdatascience.com/differentiable-rendering-d00a4b0f14be
+8. https://blog.qarnot.com/article/an-overview-of-differentiable-rendering

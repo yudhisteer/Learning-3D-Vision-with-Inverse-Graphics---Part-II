@@ -28,14 +28,68 @@ Once way if to use an **occupancy field**. It is a **continuous function** that 
   <img src="https://github.com/user-attachments/assets/5866832e-102b-4a8e-953f-f10109532135" width="30%" />
 </p>
 
-Occupanyc fields are **implicit representations** as we do not store actual surface or volume points. Instead, we store a function (a neural network) that can tell us for ANY point whether it's occupied. The surface is defined **implicitly** as the level set where ```f(x,y,z) = 0.5```.
+Occupanyc fields are **implicit representations** as we do not store actual surface or volume points. Instead, we store a function (a neural network) that can tell us for any point whether it's occupied. The surface is defined **implicitly** as the level set where ```f(x,y,z) = 0.5```.
+
+```python
+# Implicit (Occupancy Field)
+def occupancy_field(x, y, z):
+    # Implicitly defines shape through a function
+    return neural_network(torch.tensor([x, y, z]))  # Returns if point is inside/outside
+```
 
 **2. Signed Distance Field**
+
 Another example is to use a SDF where for every point in 3D space, it gives us the distance to te surface. Normally, negative values = inside, positive values = outside and zero = exactly on surface.
 
 <p align="center">
   <img src="https://github.com/user-attachments/assets/d73fcc83-f4cc-4a8d-85a7-23441bae311c" width="30%" />
 </p>
+
+The SDF is an **implicit continuous function** that maps any 3D point to a **distance value**. We can choose the level set to be ```0``` such that above that value(+ve values) is **classified** as "outside" and below(-ve values) is "inside". 
+
+
+```python
+# Implicit (SDF)
+def signed_distance_field(x, y, z):
+    # Returns actual distance (negative inside, positive outside)
+    return network(torch.tensor([x, y, z]))
+```
+
+-----------
+
+**3. Neural Fields**
+
+SDF can represent non-complex functions such as a sphere or a cube. However, for more complex shapes, we need more complex functions. This is where **neural fields** come into play. NN are known as universal approximators, meaning they can closely  represent any continuous function given enough parameters.
+
+SDF and Occupancy fields can be represented using a **neural field** which is a **continuous function** that maps any 3D point to a **distance value** or **probability value**.
+
+
+```python
+def neural_field_sdf(x,y,z):
+    coords = torch.tensor([x,y,z])
+    return network(coords)  # Can output distance (SDF)
+
+def neural_field_occupancy(x,y,z):
+    coords = torch.tensor([x,y,z])
+    return network(coords)  # Can output occupancy [0,1]
+```
+
+Neural fields are compact multi-resolution representations of shapes that is also continuous. To train a neural field, we can sample 3D cooridnates from the ground-truth and then feed it to the NN to reproduce the occupancy function. We then extract the surface with marching cubes algo.
+
+In summary:
+
+- Storage memory does not grow with the complexity of the shape.(spatial resolution or number of spatial dimensions)
+- GPU-memory intensive: Each query requires a forward pass through the NN.
+- Over-optimization techniqe with adaptive sampling in detailed regions: Network can learn to allocate parameters efficiently.
+
+-------------
+
+Neural Tangent Kernel
+
+
+
+---------------
+
 
 
 

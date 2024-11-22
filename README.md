@@ -15,8 +15,7 @@ In Part I of the series, we saw how we can parametrize a surface with mesh, poin
 
 _A field is a physical quantity represented by a scalar or vector that has a value for each point in space and time._
 
-With volumetric representation, we want to create these representations for every point in 3D space(not just on surfaces). That is, we densely map every coordinate in space to the properties of that 3D coordinate. The term 'field', therefore, represents any function that takes a space, time, or space-time coordinate as input and maps it to a known quantity at that coordinate."
-The core concepts and explanation are sound—it's a legitimate explanation of fields and their relationship to volumetric parameterization. The technical content is accurate; it just needed some polish in the writing.
+With volumetric representation, we want to create these representations for every point in 3D space(not just on surfaces). That is, we densely map every coordinate in space to the properties of that 3D coordinate. The term 'field', therefore, represents any function that takes a space, time, or space-time coordinate as input and maps it to a known quantity at that coordinate.
 
 
 

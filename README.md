@@ -115,9 +115,9 @@ We observe that the MLP **without positional encoding** outputs a blurry image. 
 
 **Neural Tangent Kernel**
 
-Now we may be under the assumption that we are doing some "Artificial Intelligence" here but actually we are not. We are just doing "Bi-linear interpolation ++".
+Now we may be under the assumption that we are doing some "Artificial Intelligence" here but actually we are not. We are just doing "_Bi-linear interpolation ++_".
 
-The role of our MLP and that in a NeRF is the role of an **interpolation kernel**.  Neural implicit representations essentially perform **kernel regression/interpolation** based on the **Neural Tangent Kernel**. Te network just interpolates between training points.
+The role of our MLP and that in a NeRF is the role of an **interpolation kernel**.  Neural implicit representations essentially perform **kernel regression/interpolation** based on the **Neural Tangent Kernel**. The network just interpolates between training points.
 
 Given a training set {(**x<sub>i</sub>**, **y<sub>i</sub>**)}<sub>i</sub>, a kernel function makes predictions on a point **x** by interpolating labels **y<sub>i</sub>** in the training set according to pairwise weights between **x<sub>i</sub>** to **x** as meaured by the kernel function **k**.
 
@@ -152,17 +152,24 @@ def ntk_inference(query_point, training_points, training_values, ntk_kernel):
    return prediction
 ```
 
-For an input coordinate ```x``` that is close to a training point ```x'```, former has to be very close to the latter in order to produce the correct output. Hence, a blurry image shows that the neighboring pixels are coupled together - the one with ReLU activation functions.
+In summary, we are **overfitting** to the training data. For an input coordinate ```x``` that is close to a training point ```x'```, the former has to be very close to the latter in order to produce the correct output. 
 
 
+If we have a pixel grid, what does the grid knows about the image? Nothing! The pixel values are uncorrelated with any **semantic meaning**. Hence, a blurry image shows that the neighboring pixels are coupled together - the one with ReLU activation functions.
 
 
 ### 1.2 Siren
 
-SIREN: loss: 0.0070
-
-![ezgif com-animated-gif-maker (5)](https://github.com/user-attachments/assets/831936cb-612e-441e-8e5d-02813cbc22ec)
-
+<div style="text-align: center;">
+  <table>
+    <tr>
+      <th style="text-align: center;">SIREN loss = 0.0070</th>
+    </tr>
+    <tr>
+      <td><img src="https://github.com/user-attachments/assets/831936cb-612e-441e-8e5d-02813cbc22ec" alt="SIREN Image" width="300"></td>
+    </tr>
+  </table>
+</div>
 
 ### 1.3 Grid
 

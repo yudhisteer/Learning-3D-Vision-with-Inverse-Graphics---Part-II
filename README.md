@@ -99,6 +99,7 @@ We first implement the MLP without any positional encoding. Positional encoding 
 
 We observe that the MLP **without positional encoding** outputs a blurry image. This is because the network is not able to learn the spatial structure of the image. On the other hand, the MLP **with positional encoding** is able to learn the high frequency details of the image better.
 
+
 <div style="text-align: center;">
 <table>
   <tr>
@@ -110,9 +111,50 @@ We observe that the MLP **without positional encoding** outputs a blurry image. 
     <td><img src="https://github.com/user-attachments/assets/c7aa2d9a-2044-43a2-96dc-0b6bbde9c4fb" alt="MLP with Positional Encoding" width="300"></td>
   </tr>
 </table>
+</div>
+
+**Neural Tangent Kernel**
+
+Now we may be under the assumption that we are doing some "Artificial Intelligence" here but actually we are not. We are just doing "Bi-linear interpolation ++".
+
+The role of our MLP and that in a NeRF is the role of an **interpolation kernel**.  Neural implicit representations essentially perform **kernel regression/interpolation** based on the **Neural Tangent Kernel**. Te network just interpolates between training points.
+
+Given a training set {(**x<sub>i</sub>**, **y<sub>i</sub>**)}<sub>i</sub>, a kernel function makes predictions on a point **x** by interpolating labels **y<sub>i</sub>** in the training set according to pairwise weights between **x<sub>i</sub>** to **x** as meaured by the kernel function **k**.
+
+$$
+f(\textbf{x}) = \sum_{i=1}^{n}(\textbf{K}^{-1}\textbf{y})_ik(\textbf{x}_i, \textbf{x})
+$$
 
 
-Neural Tangent Kernel
+$$
+k_{NTK}(x_1, x_2) =  \frac{\partial f(x_1; \theta)}{\partial \theta} \cdot \frac{\partial f(x_2; \theta)}{\partial \theta}
+$$
+
+where **K**<sub>ij</sub> = k<sub>NTK</sub>(**x<sub>i</sub>**, **x<sub>j</sub>**), k is the kernel function with k >= 0.
+
+```python
+def ntk_inference(query_point, training_points, training_values, ntk_kernel):
+   # Initialize list to store kernel values
+   k_values = []
+   
+   # Compute kernel between query point and each training point
+   for train_point in training_points:
+       k = ntk_kernel(query_point, train_point)
+       k_values.append(k)
+   
+   # Initialize prediction
+   prediction = 0.0
+   
+   # Compute weighted sum
+   for i in range(len(training_points)):
+       prediction += k_values[i] * training_values[i]
+   
+   return prediction
+```
+
+For an input coordinate ```x``` that is close to a training point ```x'```, former has to be very close to the latter in order to produce the correct output. Hence, a blurry image shows that the neighboring pixels are coupled together - the one with ReLU activation functions.
+
+
 
 
 ### 1.2 Siren

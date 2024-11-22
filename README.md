@@ -21,7 +21,7 @@ With volumetric representation, we want to create these representations for ever
 
 **1. Occupancy Field**
 
-Once way if to use an **occupancy field**. It is a **continuous function** that maps any 3D point to a **probability value**([0, 1]) that indicates the **likelihood** of being occupied. We can choose the level set to be ```0.5``` such that above that value it is **classifed** as "occupied" and below is "not occupied" - similar to how a **logistic regression** would work in 3D space.
+**Occupancy field** is a **continuous function** that maps any 3D point to a **probability value**([0, 1]) that indicates the **likelihood** of being occupied. We can choose the level set to be ```0.5``` such that above that value it is **classifed** as "occupied" and below is "not occupied" - similar to how a **logistic regression** would work in 3D space.
 
 <p align="center">
   <img src="https://github.com/user-attachments/assets/5866832e-102b-4a8e-953f-f10109532135" width="30%" />

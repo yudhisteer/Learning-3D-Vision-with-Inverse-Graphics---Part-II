@@ -73,11 +73,11 @@ SDF and Occupancy fields can be represented using a **neural field** which is a 
 ```python
 def neural_field_sdf(x,y,z):
     coords = torch.tensor([x,y,z])
-    return network(coords)  # Can output distance (SDF)
+    return network(coords)  # output distance (SDF)
 
 def neural_field_occupancy(x,y,z):
     coords = torch.tensor([x,y,z])
-    return network(coords)  # Can output occupancy [0,1]
+    return network(coords)  # output occupancy [0,1]
 ```
 
 Neural fields are compact multi-resolution representations of shapes that is also continuous. To train a neural field, we can sample 3D cooridnates from the ground-truth and then feed it to the NN to reproduce the occupancy function. We then extract the surface with marching cubes algo.
